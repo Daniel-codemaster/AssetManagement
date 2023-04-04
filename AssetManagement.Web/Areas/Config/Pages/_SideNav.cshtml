@@ -1,0 +1,17 @@
+﻿@{
+    string page = ViewContext.RouteData.Values["page"]?.ToString()?.ToLower() ?? "";
+}
+<div class="d-flex flex-column flex-shrink-0 py-3 px-1">
+    <div class="nav nav-pills flex-column mb-auto border-bottom pb-2">
+        <div class="nav-item @(page.Contains("stations")?"active":"")">
+            <a asp-area="Config" asp-page="/Stations/Index" class="nav-link">Stations</a>
+        </div>
+        <div class="nav-item @(page.Contains("categories")?"active":"")">
+            <a asp-area="Config" asp-page="/Categories/Index" class="nav-link">Categories</a>
+        </div>
+        
+        <div class="nav-item @(page.Contains("users")?"active":"")">
+            <a asp-area="Config" asp-page="/Users/Index" class="nav-link">Users</a>
+        </div>
+    </div>
+</div>

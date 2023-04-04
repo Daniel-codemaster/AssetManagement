@@ -1,0 +1,30 @@
+﻿@model Service
+
+<form method="post">
+    <div class="card">
+        <div class="card-body">
+            
+            <div class="row mb-3">
+                <label class="col-md-4">Service date<i class="text-danger">*</i></label>
+                <div class="col-md-8">
+                    <input asp-for="ServiceDate" required class="form-control" />
+                    <span asp-validation-for="ServiceDate" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <label class="col-md-4">Description<i class="text-danger">*</i></label>
+                <div class="col-md-8">
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+                              
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-success">Save</button>
+        </div>
+    </div>
+</form>
+
+

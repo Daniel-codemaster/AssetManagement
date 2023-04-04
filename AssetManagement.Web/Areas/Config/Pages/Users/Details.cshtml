@@ -1,0 +1,33 @@
+﻿@page
+@model AssetManagement.Web.Areas.Config.Pages.Users.DetailsModel
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5 class="">About</h5>
+                <div class="row mb-3">
+                    <label class="col-md-3 text-muted">Name</label>
+                    <div class="col-md-9"><div class="label-value">@Model.User.Name</div></div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 text-muted">Email</label>
+                    <div class="col-md-9"><div class="label-value">@Model.User.Email</div></div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 text-muted">Phone</label>
+                    <div class="col-md-9"><div class="label-value">@Model.User.Email</div></div>
+                </div>
+            </div>
+        </div> 
+        
+    </div>
+</div>
+</div>
+
+
+@section sidebar{
+
+}

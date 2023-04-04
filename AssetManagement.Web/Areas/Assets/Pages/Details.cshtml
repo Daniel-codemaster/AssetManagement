@@ -1,0 +1,106 @@
+﻿@page "{id}"
+@model DetailsModel
+
+<div class="row">
+    <div class="col-md">
+        <div class="card">
+            <div class="card-body">
+               <div class="row">
+                   <div class="col-md-9">
+                        <div class="row">
+                            <label class="col-md-3">Name</label>
+                            <div class="col-md-9">@Model.Asset.Name</div>
+                        </div>
+                        <div class="row mt-3">
+                            <label class="col-md-3">Make</label>
+                            <div class="col-md-9">@Model.Asset.Make</div>
+                        </div> 
+                        <div class="row mt-3">
+                            <label class="col-md-3">Product number</label>
+                            <div class="col-md-9">@Model.Asset.Number</div>
+                        </div>
+                        <div class="row mt-3">
+                            <label class="col-md-3">Serial number</label>
+                            <div class="col-md-9">@Model.Asset.SerialNumber</div>
+                        </div> 
+                        
+                        @if(Model.Asset.Description != null)
+                        {
+                            <div class="row mt-3">
+                                <label class="col-md-3">Description</label>
+                                <div class="col-md-9">@Model.Asset.Description</div>
+                            </div> 
+                        }
+                        <div class="row mt-3">
+                            <label class="col-md-3">Category</label>
+                            <div class="col-md-9">@Model.Asset.Category.Name</div>
+                        </div>
+                        <div class="row mt-3">
+                            <label class="col-md-3">Station</label>
+                            <div class="col-md-9">@Model.Asset.Station.Name</div>
+                        </div>
+
+                        @if(Model.Asset.ServiceCycleId != null)
+                        {
+                            <div class="row mt-3">
+                                <label class="col-md-3">Service cycle</label>
+                                <div class="col-md-9">@Model.ServiceCycle.Period @Model.ServiceCycle.Type</div>
+                            </div> 
+                        }
+                        
+                   </div>
+                   <div class="col-md-3">
+                       <div class="row ">
+                            <center>
+                                <img src="@Model.ImageSrc" alt="QR code" style="width: 150px; height: auto;"/>
+                            </center>
+                            <center>
+                                QR Code
+                            </center>
+                        </div>
+                   </div>
+               </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+@if (Model.Asset.AssetAttributes.Any())
+{
+    <h4>Asset attributes</h4>
+    <table class="table table-sm table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Expiry date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Asset.AssetAttributes!)
+        {
+            <tr>
+                <td><a asp-page="Details" asp-route-id="@item.Id">@item.Name</a></td>
+                <td>@item.ExpiryDate?.ToString("dd / MMM / yyyy")</td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
+}
+@section Sidebar{
+    <div class="list-group list-group-flush border-bottom scrollarea">
+        <a class="list-group-item list-group-item-light justify-content-between d-flex align-items-center list-group-item-action" asp-area="Assets" asp-page="/Attributes/Add" asp-route-assetid="@Model.Asset.Id">
+            <div>Add asset attribute</div>
+            <i class="@ActionIcon.Add"></i>
+        </a>
+        <a class="list-group-item list-group-item-light justify-content-between d-flex align-items-center list-group-item-action" asp-area="Assets" asp-page="/Services/Index" asp-route-assetid="@Model.Asset.Id">
+            <div>Service history</div>
+            <span class="badge badge-danger"></span>
+        </a>
+        <a class="list-group-item list-group-item-light justify-content-between d-flex align-items-center list-group-item-action" asp-area="Assets" asp-page="/ServiceCycle" asp-route-assetid="@Model.Asset.Id">
+            <div>Update service cylce</div>
+            <i class="@ActionIcon.Edit"></i>
+        </a>
+    </div>
+}

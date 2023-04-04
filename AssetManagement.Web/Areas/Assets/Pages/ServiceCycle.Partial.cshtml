@@ -1,0 +1,32 @@
+﻿@model ServiceCycle
+
+<form method="post">
+    <div class="card">
+        <div class="card-body">
+            
+            <div class="row mb-3">
+                <label class="col-md-4">Period<i class="text-danger">*</i></label>
+                <div class="col-md-8">
+                    <input asp-for="Period" required class="form-control" />
+                    <span asp-validation-for="Period" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="row mb-3">
+                <label class="col-md-4">Type<i class="text-danger">*</i></label>
+                <div class="col-md-8">
+                    <select asp-for="Type" class="form-select" asp-items="@Html.GetEnumSelectList<CycleType>()">
+                        <option>Select...</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+            </div>
+                              
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-success">Save</button>
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,21 @@
+﻿@page "{id}"
+@model AssetManagement.Web.Areas.Config.Pages.Stations.DetailsModel
+
+<div class="row">
+    <div class="col-md">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-3">Name</label>
+                    <div class="col-md-9">@Model.Station.Name</div>
+                </div>
+                <div class="row mt-3">
+                    <label class="col-md-3">Description</label>
+                    <div class="col-md-9">@Model.Station.Description</div>
+                </div> 
+                
+            </div>
+        </div>
+    </div>
+</div>
+@section Sidebar{}

@@ -1,0 +1,1 @@
+﻿Scaffold-dbcontext "Host=localhost;Database=AssetManagement;Username=postgres;Password=computers044" Npgsql.EntityFrameworkCore.PostgreSQL -namespace "AssetManagement.Data" -outputdir "Entities" -force
