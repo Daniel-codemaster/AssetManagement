@@ -7,13 +7,13 @@
             <div class="row mb-3">
                 <label class="col-md-4">Service date<i class="text-danger">*</i></label>
                 <div class="col-md-8">
-                    <input asp-for="ServiceDate" required class="form-control" />
-                    <span asp-validation-for="ServiceDate" class="text-danger"></span>
+                    <input type="date" asp-for="ServiceDateString" required class="form-control" />
+                    <span asp-validation-for="ServiceDateString" class="text-danger"></span>
                 </div>
 
             </div>
             <div class="row mb-3">
-                <label class="col-md-4">Description<i class="text-danger">*</i></label>
+                <label class="col-md-4">Description</label>
                 <div class="col-md-8">
                     <textarea asp-for="Description" class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>

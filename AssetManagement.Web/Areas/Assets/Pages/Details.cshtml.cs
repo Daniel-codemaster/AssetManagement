@@ -11,6 +11,8 @@ namespace AssetManagement.Web.Areas.Assets.Pages
         public Asset Asset { get; set; }
 
         public ServiceCycle ServiceCycle { get; set; }
+
+        public Service LastService { get; set; }
         public string ImageSrc { get; set; }
         public async Task OnGet(Guid id)
         {
@@ -25,6 +27,12 @@ namespace AssetManagement.Web.Areas.Assets.Pages
             {
                 ServiceCycle = await Db.ServiceCycles.FirstAsync(c => c.Id == Asset.ServiceCycleId);
             }
+            var query = Db.Services.Where(c => c.AssetId == Asset.Id);
+            if (query.Any())
+            {
+                LastService = query.OrderByDescending(c => c.ServiceDate).ToList().First();
+            }
+
 
             string base64Image = Convert.ToBase64String(Asset.ImageData);
             ImageSrc = string.Format("data:image/png;base64,{0}", base64Image);

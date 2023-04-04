@@ -17,6 +17,7 @@ namespace AssetManagement.Web.Areas.Assets.Pages.Attributes
                 .FirstAsync(c => c.Id == id);
 
 
+
             PageTitle = Title = Attribute.Name;
             BreadCrumb.Add(Attribute.Name);
             ActionBar.Add("Edit", page: "Edit", routeValue: new { id = id }, icon: ActionIcon.Edit);

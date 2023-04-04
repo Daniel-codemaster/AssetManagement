@@ -29,7 +29,7 @@ namespace AssetManagement.Web.Areas.Assets.Pages.Services
 
             Db.Services.Add(Service);
             await Db.SaveChangesAsync();
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new {assetid = asset.Id});
         }
     }
 }

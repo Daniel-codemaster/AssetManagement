@@ -39,7 +39,16 @@
                             <label class="col-md-3">Station</label>
                             <div class="col-md-9">@Model.Asset.Station.Name</div>
                         </div>
-
+                        <div class="row mt-3">
+                            <div class="col-md-8">
+                                <h5>Service info..</h5>
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-3">Last service date</label>
+                            <div class="col-md-9">@(Model.LastService?.ServiceDate.ToString("dd / MMM / yyyy")??"N/A")</div>
+                        </div> 
                         @if(Model.Asset.ServiceCycleId != null)
                         {
                             <div class="row mt-3">
@@ -79,7 +88,7 @@
         @foreach(var item in Model.Asset.AssetAttributes!)
         {
             <tr>
-                <td><a asp-page="Details" asp-route-id="@item.Id">@item.Name</a></td>
+                <td><a asp-page="/Attributes/Details" asp-route-id="@item.Id">@item.Name</a></td>
                 <td>@item.ExpiryDate?.ToString("dd / MMM / yyyy")</td>
                
             </tr>

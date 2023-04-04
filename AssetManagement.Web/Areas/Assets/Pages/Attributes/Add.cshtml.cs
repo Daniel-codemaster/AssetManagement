@@ -26,10 +26,11 @@ namespace AssetManagement.Web.Areas.Assets.Pages.Attributes
 
             AssetAttribute.Id = Guid.NewGuid();
             AssetAttribute.AssetId = asset.Id;
+           
 
             Db.AssetAttributes.Add(AssetAttribute);
             await Db.SaveChangesAsync();
-            return RedirectToPage("./Details", new { id = assetid });
+            return RedirectToPage("./Details", new { id = AssetAttribute.Id });
         }
     }
 }
