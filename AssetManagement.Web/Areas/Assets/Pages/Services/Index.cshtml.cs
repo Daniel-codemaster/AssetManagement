@@ -10,9 +10,10 @@ namespace AssetManagement.Web.Areas.Assets.Pages.Services
     {
         public async Task OnGet(Guid assetid, int? p, int? ps, string? q)
         {
-            var query = Db.Services.AsQueryable();
+            
 
             var asset = await Db.Assets.FindAsync(assetid);
+            var query = Db.Services.Where(c => c.AssetId == asset.Id);
 
             if (!string.IsNullOrWhiteSpace(q))
             {

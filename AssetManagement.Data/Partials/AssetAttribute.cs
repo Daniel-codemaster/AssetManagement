@@ -15,6 +15,16 @@ namespace AssetManagement.Data
             get => ExpiryDate?.ToString(); 
             set => ExpiryDate = DateOnly.Parse(value); 
         }
+        [NotMapped]
+        public bool Expired 
+        {
+            get
+            {
+                if (ExpiryDate == null) return false;
+                if ((DateOnly.FromDateTime(DateTime.Now) > ExpiryDate)) return true;
+                return false;
+            }
+        } 
        
     }
 }

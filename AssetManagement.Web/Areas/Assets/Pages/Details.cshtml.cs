@@ -1,4 +1,5 @@
 using AssetManagement.Data;
+using AssetManagement.Lib;
 using AssetManagement.Web.Pages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,6 +15,7 @@ namespace AssetManagement.Web.Areas.Assets.Pages
 
         public Service LastService { get; set; }
         public string ImageSrc { get; set; }
+        public bool IsDueForService = false;
         public async Task OnGet(Guid id)
         {
             Asset = Db.Assets
@@ -31,6 +33,31 @@ namespace AssetManagement.Web.Areas.Assets.Pages
             if (query.Any())
             {
                 LastService = query.OrderByDescending(c => c.ServiceDate).ToList().First();
+
+                if(ServiceCycle!= null)
+                {
+                    if(ServiceCycle.TypeId == (int)CycleType.Day)
+                    {
+                        if(DateOnly.FromDateTime(DateTime.Now) > LastService.ServiceDate.AddDays(ServiceCycle.Period))
+                        {
+                            IsDueForService = true;
+                        }
+                    }
+                    else if (ServiceCycle.TypeId == (int)CycleType.Month)
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Now) > LastService.ServiceDate.AddMonths(ServiceCycle.Period))
+                        {
+                            IsDueForService = true;
+                        }
+                    }
+                    else
+                    {
+                        if (DateOnly.FromDateTime(DateTime.Now) > LastService.ServiceDate.AddYears(ServiceCycle.Period))
+                        {
+                            IsDueForService = true;
+                        }
+                    }
+                }
             }
 
 
