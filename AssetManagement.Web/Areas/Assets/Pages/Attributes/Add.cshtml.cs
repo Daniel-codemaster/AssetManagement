@@ -13,10 +13,11 @@ namespace AssetManagement.Web.Areas.Assets.Pages.Attributes
         public async Task OnGet(Guid assetid)
         {
            var asset = await Db.Assets.FindAsync(assetid);
+          
             BreadCrumb.Clear();
-            BreadCrumb.Add("Assets");
-            BreadCrumb.Add(asset.Name);
-            BreadCrumb.Add("Attributes");
+            BreadCrumb.Add("Assets", page: "../Index");
+            BreadCrumb.Add(asset.Name, page: "../Details", routeValues: new { id = asset.Id });
+            BreadCrumb.Add("Attributes", page: "../Details", routeValues: new { id = asset.Id });
             BreadCrumb.Add("Add");
             PageTitle = Title = "Add new..";
         }

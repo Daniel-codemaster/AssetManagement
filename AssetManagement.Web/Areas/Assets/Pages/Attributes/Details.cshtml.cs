@@ -19,7 +19,13 @@ namespace AssetManagement.Web.Areas.Assets.Pages.Attributes
 
 
             PageTitle = Title = Attribute.Name;
-            BreadCrumb.Add(Attribute.Name);
+
+            BreadCrumb.Clear();
+            BreadCrumb.Add("Assets", page: "../Index");
+            BreadCrumb.Add(Attribute.Asset.Name, page: "../Details", routeValues: new { id = Attribute.Asset.Id });
+            BreadCrumb.Add("Attributes", page: "../Details", routeValues: new { id = Attribute.Asset.Id });
+            BreadCrumb.Add(Attribute.Name, page: ".");
+
             ActionBar.Add("Edit", page: "Edit", routeValue: new { id = id }, icon: ActionIcon.Edit);
         }
     }

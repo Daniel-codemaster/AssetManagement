@@ -3,9 +3,8 @@
 <form method="post">
     <div class="card">
         <div class="card-body">
-            
             <div class="row mb-3">
-                <label class="col-md-4">Name<i class="text-danger">*</i></label>
+                <label class="col-md-4">Device name<i class="text-danger">*</i></label>
                 <div class="col-md-8">
                     <input asp-for="Name" required class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
@@ -27,7 +26,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-md-4">Number<i class="text-danger">*</i></label>
+                <label class="col-md-4">Product number<i class="text-danger">*</i></label>
                 <div class="col-md-8">
                     <input asp-for="Number" required class="form-control" />
                     <span asp-validation-for="Number" class="text-danger"></span>

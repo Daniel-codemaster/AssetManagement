@@ -202,3 +202,16 @@ h5 {
     #drop-zone.dragover {
         background-color: #e0e0e0;
     }
+
+#backgroun {
+    background-image: url('/images/background1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+#logi{
+    z-index: 200;
+    background: #fff;
+}
