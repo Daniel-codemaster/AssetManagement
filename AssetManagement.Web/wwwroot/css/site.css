@@ -215,3 +215,24 @@ h5 {
     z-index: 200;
     background: #fff;
 }
+
+.home-icons {
+    width: 40px; 
+    height: 40px;
+}
+.background {
+    background-image: url('/images/background1.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    min-height: 75vh;
+}
+.home {
+    background: rgba(255, 255, 255, 0.7);
+    min-height: 75vh;
+}
+canvas.drawing, canvas.drawingBuffer {
+    position: absolute;
+    left: 0;
+    top: 0;
+}

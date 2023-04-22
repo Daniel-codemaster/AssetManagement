@@ -9,7 +9,9 @@
         <div class="nav-item @(page.Contains("categories")?"active":"")">
             <a asp-area="Config" asp-page="/Categories/Index" class="nav-link">Categories</a>
         </div>
-        
+         <div class="nav-item @(page.Contains("categories")?"active":"")">
+            <a asp-area="Config" asp-page="/Offices/Index" class="nav-link">Offices</a>
+        </div>
         <div class="nav-item @(page.Contains("users")?"active":"")">
             <a asp-area="Config" asp-page="/Users/Index" class="nav-link">Users</a>
         </div>

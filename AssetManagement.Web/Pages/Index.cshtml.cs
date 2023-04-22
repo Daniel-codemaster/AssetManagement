@@ -18,7 +18,7 @@ namespace AssetManagement.Web.Pages
             _logger = logger;
         }
 
-        public async Task OnGet()
+        public async Task OnGet(string? q)
         {
             AssetAttributes = Db.AssetAttributes.ToList();
             AssetAttributes = AssetAttributes.Where(c => c.Expired == true).ToList();

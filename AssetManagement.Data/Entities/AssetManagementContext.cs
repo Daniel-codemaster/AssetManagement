@@ -23,6 +23,8 @@ public partial class AssetManagementContext : DbContext
 
     public virtual DbSet<Notification> Notifications { get; set; }
 
+    public virtual DbSet<Office> Offices { get; set; }
+
     public virtual DbSet<Service> Services { get; set; }
 
     public virtual DbSet<ServiceCycle> ServiceCycles { get; set; }
@@ -43,6 +45,14 @@ public partial class AssetManagementContext : DbContext
 
             entity.ToTable("Asset");
 
+            entity.HasIndex(e => e.CategoryId, "IX_Asset_CategoryId");
+
+            entity.HasIndex(e => e.CreatorId, "IX_Asset_CreatorId");
+
+            entity.HasIndex(e => e.ServiceCycleId, "IX_Asset_ServiceCycleId");
+
+            entity.HasIndex(e => e.StationId, "IX_Asset_StationId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.CreationDate).HasColumnType("timestamp without time zone");
             entity.Property(e => e.Make).HasMaxLength(512);
@@ -60,6 +70,10 @@ public partial class AssetManagementContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("CreatorId_fk");
 
+            entity.HasOne(d => d.Office).WithMany(p => p.Assets)
+                .HasForeignKey(d => d.OfficeId)
+                .HasConstraintName("OfficeId_fk");
+
             entity.HasOne(d => d.ServiceCycle).WithMany(p => p.Assets)
                 .HasForeignKey(d => d.ServiceCycleId)
                 .HasConstraintName("ServiceCycleId_fk");
@@ -75,6 +89,8 @@ public partial class AssetManagementContext : DbContext
             entity.HasKey(e => e.Id).HasName("AssetAttribute_pkey");
 
             entity.ToTable("AssetAttribute");
+
+            entity.HasIndex(e => e.AssetId, "IX_AssetAttribute_AssetId");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name).HasMaxLength(512);
@@ -101,6 +117,8 @@ public partial class AssetManagementContext : DbContext
 
             entity.ToTable("Notification");
 
+            entity.HasIndex(e => e.AssetId, "IX_Notification_AssetId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.Asset).WithMany(p => p.Notifications)
@@ -109,11 +127,27 @@ public partial class AssetManagementContext : DbContext
                 .HasConstraintName("AssetId_fk");
         });
 
+        modelBuilder.Entity<Office>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("Office_pkey");
+
+            entity.ToTable("Office");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Name).HasColumnType("character varying");
+
+            entity.HasOne(d => d.Station).WithMany(p => p.Offices)
+                .HasForeignKey(d => d.StationId)
+                .HasConstraintName("StationId_fkey");
+        });
+
         modelBuilder.Entity<Service>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("Service_pkey");
 
             entity.ToTable("Service");
+
+            entity.HasIndex(e => e.AssetId, "IX_Service_AssetId");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 

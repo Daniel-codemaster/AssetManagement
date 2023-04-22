@@ -5,6 +5,8 @@ namespace AssetManagement.Data;
 
 public partial class User
 {
+    public Guid Id { get; set; }
+
     public string Name { get; set; } = null!;
 
     public string Email { get; set; } = null!;
@@ -36,8 +38,6 @@ public partial class User
     public string LoginId { get; set; } = null!;
 
     public bool IsMobileConfirmed { get; set; }
-
-    public Guid Id { get; set; }
 
     public string? SecurityStamp { get; set; }
 

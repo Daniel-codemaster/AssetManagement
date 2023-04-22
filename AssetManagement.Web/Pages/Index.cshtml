@@ -3,8 +3,65 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="background">
+    <div class="home">
+        <div class="row">
+            <div class="offset-md-2 col-md-8">
+                <div class="text-center">
+                    <h1 class="display-4">Welcome</h1>
+                     <a asp-page="ScanQR" class="btn btn-secondary" target="_blank"><i class="fa-solid fa-qrcode"></i> Scan QR Code</a>
+                     <div class="">OR</div>
+                    <div class="input-group mb-3 mt-1">
+                      <input type="text" class="form-control form-control-lg" placeholder="Search product or serial number..."  aria-describedby="button-addon2">
+                      <a class="btn btn-outline-secondary" >Search</a>
+                     
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card shadow p-5 h-100">
+                            <div class="text-center">
+                                <i class="fa-solid fa-magnifying-glass-chart text-primary home-icons"></i>
+                            </div>
+                            <div class="text-center">
+                                <h2>25</h2>
+                            </div>
+                             <div class="text-center text-muted">
+                                 <h5>Total Assets</h5>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                         <div class="card shadow p-5 h-100">
+                            <div class="text-center">
+                                <i class="fa-solid fa-circle-exclamation home-icons text-warning"></i>
+                            </div>
+                            <div class="text-center">
+                                <h2>0</h2>
+                            </div>
+                             <div class="text-center text-muted">
+                                 <h5>Due for Service</h5>
+                        </div>
+                    </div>
+            
+                    </div>
+                     <div class="col-md-4">
+                        <div class="card shadow p-5 h-100">
+                            <div class="text-center">
+                                <i class="fa-solid fa-triangle-exclamation home-icons text-warning"></i>
+                            </div>
+                            <div class="text-center">
+                                <h2>1</h2>
+                            </div>
+                            <div class="text-center text-muted">
+                                <h5>Expired Licenses</h5>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+

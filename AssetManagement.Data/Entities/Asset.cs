@@ -29,6 +29,8 @@ public partial class Asset
 
     public byte[] ImageData { get; set; } = null!;
 
+    public Guid? OfficeId { get; set; }
+
     public virtual ICollection<AssetAttribute> AssetAttributes { get; } = new List<AssetAttribute>();
 
     public virtual AssetCategory Category { get; set; } = null!;
@@ -36,6 +38,8 @@ public partial class Asset
     public virtual User Creator { get; set; } = null!;
 
     public virtual ICollection<Notification> Notifications { get; } = new List<Notification>();
+
+    public virtual Office? Office { get; set; }
 
     public virtual ServiceCycle? ServiceCycle { get; set; }
 

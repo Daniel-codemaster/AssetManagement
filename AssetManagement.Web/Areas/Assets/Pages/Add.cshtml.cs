@@ -16,10 +16,13 @@ namespace AssetManagement.Web.Areas.Assets.Pages
         public SelectList Categories { get; set; }
         [ViewData]
         public SelectList Stations { get; set; }
+        [ViewData]
+        public SelectList Offices { get; set; }
         public void OnGet()
         {
             Categories = new SelectList(Db.AssetCategories, nameof(AssetCategory.Id), nameof(AssetCategory.Name));
             Stations = new SelectList(Db.Stations, nameof(Station.Id), nameof(Station.Name));
+            Offices = new SelectList(Db.Offices, nameof(Office.Id), nameof(Office.Name));
             BreadCrumb.Add("Add");
             PageTitle = Title = "Add new..";
         }
