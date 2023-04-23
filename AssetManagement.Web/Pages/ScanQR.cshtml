@@ -1,21 +1,15 @@
 ﻿@page
 @model ScanQRModel
 
+<!-- Div to show the scanner -->
 <div class="text-center">
     <div id="scanner-container"></div>
-<input type="button" id="btn" value="Start/Stop the scanner" />
+    <input type="button" id="btn" value="Start/Stop the scanner" />
 </div>
-
-
-
-
+    
 @section Scripts{
-
-   <script src="/lib/quagga/quagga.min.js"></script>
-
-
-   
-     <script>
+    <script src="/lib/quagga/quagga.min.js"></script>
+     <script>     
         var _scannerIsRunning = false;
 
         function startScanner() {
