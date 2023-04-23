@@ -1,0 +1,46 @@
+﻿@model User
+
+<form method="post">
+    <div class="card">
+        <div class="card-body">
+            
+            <div class="row mb-3">
+                <label class="col-md-4">Fullname<i class="text-danger">*</i></label>
+                <div class="col-md-8">
+                    <input asp-for="Name" required class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-md-4">Login ID<i class="text-danger">*</i></label>
+                <div class="col-md-8">
+                    <input asp-for="LoginId" required class="form-control" />
+                    <span asp-validation-for="LoginId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-md-4">Email<i class="text-danger">*</i></label>
+                <div class="col-md-8">
+                    <input asp-for="Email" required class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-md-4">Mobile</label>
+                <div class="col-md-8">
+                    <input asp-for="Mobile" class="form-control" />
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+
+            </div>
+            
+           
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-success">Save</button>
+        </div>
+    </div>
+</form>
+
+
+

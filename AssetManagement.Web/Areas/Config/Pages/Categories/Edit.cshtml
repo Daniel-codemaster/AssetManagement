@@ -1,4 +1,9 @@
 ﻿@page
-@model AssetManagement.Web.Areas.Config.Pages.Categories.EditModel
-@{
+@model EditModel
+
+<partial name="Edit.Partial" model="@Model.Category" />
+@section sidebar{
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

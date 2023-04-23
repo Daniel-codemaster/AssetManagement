@@ -1,4 +1,8 @@
 ﻿@page
 @model EditModel
-@{
+<partial name="EditPartial" model="@Model.Office" />
+@section sidebar{
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

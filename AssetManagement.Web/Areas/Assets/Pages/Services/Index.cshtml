@@ -12,7 +12,7 @@
         @foreach(var item in Model.List!)
         {
             <tr>
-                <td><a asp-page="Details" asp-route-id="@item.Id">@item.ServiceDate</a></td>
+                <td>@item.ServiceDate</td>
                 <td>@(item.Description??"Service")</td>
                
             </tr>

@@ -13,6 +13,7 @@ using AssetManagement.Web.Pages;
 using AssetManagement.Data;
 using AssetManagement.Web.Areas.Identity.Pages.Account;
 using AssetManagement.Lib;
+using Microsoft.EntityFrameworkCore;
 
 namespace AssetManagement.Web.Areas.Identity.Pages.Account
 {
@@ -71,7 +72,26 @@ namespace AssetManagement.Web.Areas.Identity.Pages.Account
         }
 
         #region snippet
-       
+        public async Task<IActionResult> OnPostAsync(Guid code)
+        {
+
+            var user = await Db.Users.FirstAsync(c => c.Id == code);
+            if (user == null)
+            {
+                Title = PageTitle = "Activate login account";
+                return Page();
+            }
+           
+            user.IsActive = true;
+            user.IsEmailConfirmed = true;
+            user.ActivationDate = DateTime.UtcNow;
+           
+            Db.Update(user);
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, Input.Password);
+            await Db.SaveChangesAsync();
+
+            return RedirectToPage("./Login", new { code = user.Id });
+        }
         #endregion
     }
 }

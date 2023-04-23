@@ -18,7 +18,7 @@ namespace AssetManagement.Web.Areas.Config.Pages.Users
                 query = query.Where(c => c.Name.ToUpper().Contains(q) || c.Email.Contains(q));
             }
             List = query.OrderBy(c => c.Name).ToPagedList(p ?? 1, ps ?? DefaultPageSize);
-
+            ActionBar.Add("Add", page: "Add", icon: ActionIcon.Add);
             SetPageTitles("CurUser");
         }
     }
