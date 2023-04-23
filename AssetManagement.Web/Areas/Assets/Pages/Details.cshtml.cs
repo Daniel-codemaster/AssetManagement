@@ -18,13 +18,16 @@ namespace AssetManagement.Web.Areas.Assets.Pages
         public bool IsDueForService = false;
         public async Task OnGet(Guid id)
         {
-            Asset = await Db.Assets
+           
+                Asset = await Db.Assets
                 .Include(c => c.Station)
                 .Include(c => c.Category)
                 .Include(c => c.Creator)
                 .Include(c => c.AssetAttributes)
                 .Include(c => c.Office)
                 .FirstAsync(c => c.Id == id);
+            
+            
 
             if (Asset.ServiceCycleId != null)
             {

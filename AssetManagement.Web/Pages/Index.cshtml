@@ -11,11 +11,14 @@
                     <h1 class="display-4">Welcome</h1>
                      <a asp-page="ScanQR" class="btn btn-secondary" target="_blank"><i class="fa-solid fa-qrcode"></i> Scan QR Code</a>
                      <div class="">OR</div>
-                    <div class="input-group mb-3 mt-1">
-                      <input type="text" class="form-control form-control-lg" placeholder="Search product or serial number..."  aria-describedby="button-addon2">
-                      <a class="btn btn-outline-secondary" >Search</a>
+                     <form method="post" asp-page-handler="Asset">
+                         <div class="input-group mb-3 mt-1 shadow">
+                            <input type="text" class="form-control form-control-lg" placeholder="Search product or serial number..."  name="q" required>
+                            <button type="submit" class="btn btn-outline-secondary" >Search</button>
                      
-                    </div>
+                        </div>
+                     </form>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -24,7 +27,7 @@
                                 <i class="fa-solid fa-magnifying-glass-chart text-primary home-icons"></i>
                             </div>
                             <div class="text-center">
-                                <h2>25</h2>
+                                <h2>@Model.Assets.Count</h2>
                             </div>
                              <div class="text-center text-muted">
                                  <h5>Total Assets</h5>
@@ -37,7 +40,7 @@
                                 <i class="fa-solid fa-circle-exclamation home-icons text-warning"></i>
                             </div>
                             <div class="text-center">
-                                <h2>0</h2>
+                                <h2>@Model.DueForService</h2>
                             </div>
                              <div class="text-center text-muted">
                                  <h5>Due for Service</h5>
@@ -48,10 +51,10 @@
                      <div class="col-md-4">
                         <div class="card shadow p-5 h-100">
                             <div class="text-center">
-                                <i class="fa-solid fa-triangle-exclamation home-icons text-warning"></i>
+                                <i class="fa-solid fa-triangle-exclamation home-icons text-danger"></i>
                             </div>
                             <div class="text-center">
-                                <h2>1</h2>
+                                <h2>@Model.AssetAttributes.Count</h2>
                             </div>
                             <div class="text-center text-muted">
                                 <h5>Expired Licenses</h5>

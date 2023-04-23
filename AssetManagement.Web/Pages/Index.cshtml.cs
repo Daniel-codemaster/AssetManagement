@@ -12,18 +12,21 @@ namespace AssetManagement.Web.Pages
 
         public List<Asset> Assets = new List<Asset>();
         public List<AssetAttribute> AssetAttributes = new List<AssetAttribute>();
+        public int DueForService = 0;
 
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
 
-        public async Task OnGet(string? q)
+        public async Task OnGet()
         {
+           
             AssetAttributes = Db.AssetAttributes.ToList();
             AssetAttributes = AssetAttributes.Where(c => c.Expired == true).ToList();
 
             var assets = Db.Assets.ToList();
+            Assets = assets;
             foreach(var asset in assets)
             {
                 var services = Db.Services
@@ -56,13 +59,26 @@ namespace AssetManagement.Web.Pages
 
                         if (DateOnly.FromDateTime(DateTime.Now) > date)
                         {
-
+                            DueForService += 1;
                         }
                     }
                     
                 }
-
+               
             }
+        }
+        public async Task<IActionResult> OnPostAsset(string q)
+        {
+           
+            var asset = Db.Assets.FirstOrDefault(c => c.Number == q || c.SerialNumber == q);
+
+            if(asset != null)
+            {
+                return RedirectToPage("/Details", new { area="Assets", asset.Id });
+            }
+            return Page();
+            
+            
         }
     }
 }
