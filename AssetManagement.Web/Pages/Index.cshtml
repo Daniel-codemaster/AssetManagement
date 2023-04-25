@@ -22,44 +22,50 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card shadow p-5 h-100">
-                            <div class="text-center">
-                                <i class="fa-solid fa-magnifying-glass-chart text-primary home-icons"></i>
+                        <a asp-area="Assets" asp-page="Index">
+                            <div class="card shadow p-5 h-100 card-link">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-magnifying-glass-chart text-primary home-icons"></i>
+                                </div>
+                                <div class="text-center">
+                                    <h2>@Model.Assets.Count</h2>
+                                </div>
+                                 <div class="text-center text-muted">
+                                     <h5>Total Assets</h5>
+                                </div>
                             </div>
-                            <div class="text-center">
-                                <h2>@Model.Assets.Count</h2>
-                            </div>
-                             <div class="text-center text-muted">
-                                 <h5>Total Assets</h5>
-                            </div>
-                        </div>
+                        </a>                       
                     </div>
                      <div class="col-md-4">
-                         <div class="card shadow p-5 h-100">
-                            <div class="text-center">
-                                <i class="fa-solid fa-circle-exclamation home-icons text-warning"></i>
+                         <a asp-area="Assets" asp-page="Index" asp-route-dueForService="1">
+                              <div class="card shadow p-5 h-100 card-link">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-circle-exclamation home-icons text-warning"></i>
+                                </div>
+                                <div class="text-center">
+                                    <h2>@Model.DueForService</h2>
+                                </div>
+                                <div class="text-center text-muted">
+                                    <h5>Due for Service</h5>
+                                </div>
                             </div>
-                            <div class="text-center">
-                                <h2>@Model.DueForService</h2>
-                            </div>
-                             <div class="text-center text-muted">
-                                 <h5>Due for Service</h5>
-                        </div>
-                    </div>
-            
+                         </a>
                     </div>
                      <div class="col-md-4">
-                        <div class="card shadow p-5 h-100">
-                            <div class="text-center">
-                                <i class="fa-solid fa-triangle-exclamation home-icons text-danger"></i>
+                         <a asp-area="Assets" asp-page="Index" asp-route-expLicenses="1">
+                             <div class="card shadow p-5 h-100 card-link">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-triangle-exclamation home-icons text-danger"></i>
+                                </div>
+                                <div class="text-center">
+                                    <h2>@Model.AssetAttributes.Count</h2>
+                                </div>
+                                <div class="text-center text-muted">
+                                    <h5>Expired Licenses</h5>
+                                </div>
                             </div>
-                            <div class="text-center">
-                                <h2>@Model.AssetAttributes.Count</h2>
-                            </div>
-                            <div class="text-center text-muted">
-                                <h5>Expired Licenses</h5>
-                            </div>
-                        </div>
+                         </a>
+                        
                     </div>
             </div>
         </div>

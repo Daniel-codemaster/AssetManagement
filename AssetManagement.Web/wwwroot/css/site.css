@@ -236,3 +236,11 @@ canvas.drawing, canvas.drawingBuffer {
     left: 0;
     top: 0;
 }
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.card-link:hover {
+    background: #f5f7f6;
+}
