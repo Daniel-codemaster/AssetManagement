@@ -7,5 +7,6 @@
         public const string Save = "bi-save";
         public const string Customers = "bi-people";
         public const string Upload = "bi-upload";
+        public const string Download = "fa-solid fa-circle-down";
     }
 }

@@ -1,5 +1,7 @@
 ﻿
 using AssetManagement.Data;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -102,6 +104,36 @@ namespace AssetManagement.Web.Pages
             Title = GetType().Namespace[(GetType().Namespace.LastIndexOf(".") + 1)..];
             if (Title == "Pages" && GetType().Namespace.Contains("Area")) Title = area;
             base.OnPageHandlerExecuting(context);
+        }
+        public byte[] GeneratePdf(string link)
+        {
+            var PdfConverter = Request.HttpContext.RequestServices.GetService<IConverter>();
+            var cookies = new Dictionary<string, string>(Request.Cookies);
+            var doc = new HtmlToPdfDocument()
+            {
+                GlobalSettings =
+                {
+                    ColorMode = ColorMode.Color,
+                    Orientation = Orientation.Landscape,
+                    PaperSize = PaperKind.A5,
+                    Margins = new MarginSettings() { Top = 10, Bottom = 10 },
+
+                },
+                Objects = {
+                    new ObjectSettings()
+                    {
+                        Page = link,
+                        LoadSettings = new LoadSettings{ Cookies= cookies},
+                        FooterSettings = new FooterSettings
+                        {
+                            Left = "Page [page] of [toPage]",
+                            FontSize = 9,
+                            Spacing = 10,
+                        },
+                    },
+                }
+            };
+            return PdfConverter.Convert(doc);
         }
     }
 }

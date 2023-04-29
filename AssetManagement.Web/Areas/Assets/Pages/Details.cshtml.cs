@@ -4,6 +4,7 @@ using AssetManagement.Web.Pages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using wCyber.Helpers.Web;
 
 namespace AssetManagement.Web.Areas.Assets.Pages
 {
@@ -71,7 +72,13 @@ namespace AssetManagement.Web.Areas.Assets.Pages
 
             PageTitle = Title = Asset.Name;
             BreadCrumb.Add(Asset.Name);
+            ActionBar.Add("Download QR Code", page: "Details", routeValue: new { id = id }, icon: ActionIcon.Download, handler: "Download", actionType: PageActionBar.PageActionType.SECONDARY);
             ActionBar.Add("Edit", page: "Edit", routeValue: new { id = id }, icon: ActionIcon.Edit);
+           
+        }
+        public IActionResult OnGetDownload(Guid id)
+        {
+            return File(GeneratePdf(Url.PageLink(pageName: "./DownloadQR", values: new { id })), "application/pdf", "qrcode.pdf");
         }
     }
 }

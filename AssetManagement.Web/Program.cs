@@ -1,13 +1,33 @@
 using AssetManagement.Data;
+using AssetManagement.Web;
 using AssetManagement.Web.Auth;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Runtime.InteropServices;
 using wCyber.Helpers.Identity;
 using wCyber.Helpers.Identity.Auth;
 using wCyber.Lib;
 using wCyber.Lib.FileStorage;
 using wCyber.Lib.FileStorage.Azure;
+using Microsoft.Extensions.DependencyInjection;
+
+
+void LoadPdfLibs(IServiceCollection services, string contentPath)
+{
+    System.Runtime.Loader.AssemblyLoadContext.Default.ResolvingUnmanagedDll += (o, e) =>
+    {
+        var architectureFolder = (IntPtr.Size == 8) ? "64bit" : "32bit";
+        var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        var wkHtmlToPdfPath = Path.Combine(contentPath, $"wkhtmltox/v0.12.4/{architectureFolder}/libwkhtmltox.{(isWindows ? "dll" : "so")}");
+        CustomAssemblyLoadContext context = new CustomAssemblyLoadContext();
+        return context.LoadUnmanagedLibrary(wkHtmlToPdfPath);
+    };
+    var converter = new SynchronizedConverter(new PdfTools());
+    services.AddSingleton(typeof(IConverter), converter);
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +76,7 @@ builder.Services.AddRazorPages();
 
 
 builder.Services.AddSingleton<IdentityClient>();
+LoadPdfLibs(builder.Services, builder.Environment.ContentRootPath);
 
 var app = builder.Build();
 

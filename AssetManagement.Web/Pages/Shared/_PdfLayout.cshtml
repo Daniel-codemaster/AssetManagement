@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="~/images/icon.svg" />
+    <link rel="icon" type="image/svg" href="~/images/icon.svg">
+    <title>@ViewData["Title"] - Asset Management</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/select-2-theme/select2-bootstrap-5-theme.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-select-country/dist/css/bootstrap-select-country.min.css" asp-append-version="true" />
+</head>
+<body>
+    @RenderBody()
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/jquery-ui/jquery-ui.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/select2/js/select2.full.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/font-awesome/js/all.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap-select-country/dist/js/bootstrap-select-country.min.js" asp-append-version="true"></script>
+    <script src="~/lib/knockout/knockout-latest.min.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
