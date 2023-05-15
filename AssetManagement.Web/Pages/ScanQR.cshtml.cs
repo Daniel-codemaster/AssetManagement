@@ -7,6 +7,7 @@ namespace AssetManagement.Web.Pages
     {
         public void OnGet()
         {
+            
         }
     }
 }

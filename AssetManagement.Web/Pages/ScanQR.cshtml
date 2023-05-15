@@ -1,94 +1,60 @@
 ﻿@page
 @model ScanQRModel
-
-<!-- Div to show the scanner -->
-<div class="text-center">
-    <div id="scanner-container"></div>
-    <input type="button" id="btn" value="Start/Stop the scanner" />
-</div>
-    
-@section Scripts{
-    <script src="/lib/quagga/quagga.min.js"></script>
-     <script>     
-        var _scannerIsRunning = false;
-
-        function startScanner() {
-            Quagga.init({
-                inputStream: {
-                    name: "Live",
-                    type: "LiveStream",
-                    target: document.querySelector('#scanner-container'),
-                    constraints: {
-                        width: 480,
-                        height: 320,
-                        facingMode: "environment"
-                    },
-                },
-                decoder: {
-                    readers: [
-                        "code_128_reader",
-                        "ean_reader",
-                        "ean_8_reader",
-                        "code_39_reader",
-                        "code_39_vin_reader",
-                        "codabar_reader",
-                        "upc_reader",
-                        "upc_e_reader",
-                        "i2of5_reader"
-                    ],
-                    debug: {
-                        showCanvas: true,
-                        showPatches: true,
-                        showFoundPatches: true,
-                        showSkeleton: true,
-                        showLabels: true,
-                        showPatchLabels: true,
-                        showRemainingPatchLabels: true,
-                        boxFromPatches: {
-                            showTransformed: true,
-                            showTransformedBox: true,
-                            showBB: true
-                        }
-                    }
-                },
-
-            }, function (err) {
-                if (err) {
-                    console.log(err);
-                    return
-                }
-
-                console.log("Initialization finished. Ready to start");
-                Quagga.start();
-
-                // Set flag to is running
-                _scannerIsRunning = true;
-            });
-
-            Quagga.onProcessed(function (result) {
-                console.log(result); 
-            });
-
-
-            Quagga.onDetected(function (result) {
-                console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
-            });
-        }
-
-
-        // Start/stop scanner
-        document.getElementById("btn").addEventListener("click", function () {
-            if (_scannerIsRunning) {
-                Quagga.stop();
-            } else {
-                startScanner();
-            }
-        }, false);
-        startScanner();
-
-    </script>
-
+@{
+    var razorAtSymbol = "@";
 }
 
+<div class="text-center">
+    
+    <h4>Scan QR Code</h4> 
+    <video id="preview" width="400" height="300" autoplay></video>  
+</div>
+<h5>Instructions..</h5>
+<div class="small text-muted text-start">
+    <div>* - Allow the website to access your device's camera when prompted.</div>
+    <div>* - Once the camera is activated, position the QR code in front of the camera, ensuring that it is clear and well-lit.</div>
+    <div>* - Hold the QR code steady and within the camera frame, maintaining a reasonable distance from the camera.</div>
+    <div>* - The scanner will automatically detect the QR code and display the scanned content on the screen.</div>
+</div>
 
 
+@section scripts {
+
+   <script src="~/lib/jsqr/jsqr.js"></script>
+
+   <script>
+    // Access the video element
+    const video = document.getElementById('preview');
+
+    // Request access to the camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function (stream) {
+        // Set the video source to the camera stream
+        video.srcObject = stream;
+
+        // Create a canvas element for drawing QR code frames
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        // Start scanning for QR codes
+        setInterval(function () {
+          // Draw the current video frame onto the canvas
+          context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+          // Get the image data from the canvas
+          const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+          // Decode the QR code from the image data
+          const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+          // Check if a QR code is detected
+          if (code) {
+            window.location.href = code.data;
+          }
+        }, 1000 / 30); // Scan every 30 milliseconds
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  </script>
+}
